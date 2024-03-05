@@ -1,7 +1,6 @@
 package com.globant.tests;
 
-import com.globant.screens.HomeScreen;
-import com.globant.screens.WebViewScreen;
+import com.globant.screens.*;
 import com.globant.utils.tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -15,13 +14,18 @@ public class MenuBarTest extends BaseTest {
 
         Assert.assertTrue(webViewScreen.isHeaderVisible());
 
-        homeScreen.clickOnLoginOption();
+        LoginScreen loginScreen = webViewScreen.clickOnLoginOption();
+        Assert.assertTrue(loginScreen.areElementsVisible());
+        Assert.assertEquals(loginScreen.getEmailInputText(), LoginScreen.EMAIL_INPUT_TEXT);
 
-        /*
-        homeScreen.clickOnFormsOption();
-        homeScreen.clickOnSwipeOption();
-        homeScreen.clickOnDragOption();
+        FormsScreen formsScreen = loginScreen.clickOnFormsOption();
+        Assert.assertTrue(formsScreen.isHeaderVisible());
 
-         */
+        SwipeScreen swipeScreen = formsScreen.clickOnSwipeOption();
+        Assert.assertTrue(swipeScreen.areElementsVisible());
+
+        DragScreen dragScreen = swipeScreen.clickOnDragOption();
+        Assert.assertTrue(dragScreen.isHeaderVisible());
+
     }
 }
