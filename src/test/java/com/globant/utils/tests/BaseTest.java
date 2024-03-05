@@ -5,12 +5,15 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
+import com.github.javafaker.Faker;
+
 
 public class BaseTest {
     private static final String PROPERTIES_FILE = "src/test/resources/config.properties";
@@ -19,6 +22,15 @@ public class BaseTest {
     private static final String PORT = "4723";
     private static AndroidDriver androidDriver;
 
+
+
+    @DataProvider(name = "signUpData")
+    public Object[][] getSignUpData() {
+        Faker faker = new Faker();
+        String email = faker.internet().emailAddress();
+        String password = faker.internet().password();
+        return new Object[][] {{email, password}};
+    }
     @BeforeMethod(alwaysRun = true)
     public void setup() {
         loadProperties();
@@ -30,6 +42,7 @@ public class BaseTest {
             System.out.println(e.getMessage());
         }
     }
+
 
     private void loadProperties() {
         try {
@@ -62,6 +75,7 @@ public class BaseTest {
     public HomeScreen getHomeScreen() {
         return new HomeScreen(androidDriver);
     }
+
 
 
 }

@@ -4,7 +4,6 @@ import com.globant.utils.screens.BaseScreen;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginScreen extends BaseScreen {
 
@@ -13,11 +12,18 @@ public class LoginScreen extends BaseScreen {
     @AndroidFindBy(accessibility = "input-email")
     private WebElement emailInput;
 
+    @AndroidFindBy(accessibility = "input-password")
+    private WebElement passwordInput;
+
+    @AndroidFindBy(accessibility = "input-repeat-password")
+    private WebElement passwordRepeatInput;
+
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Login\")")
     private WebElement loginMenu;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Sign up\")")
     private WebElement signUpMenu;
+
 
     public LoginScreen(AndroidDriver androidDriver) {
         super(androidDriver);
@@ -43,4 +49,14 @@ public class LoginScreen extends BaseScreen {
         return isEmailInputVisible() && isLoginMenuVisible() && isSignUpMenuVisible();
     }
 
+    public void clickOnSignUpMenu() {
+        waitForElementVisible(signUpMenu);
+        signUpMenu.click();
+    }
+
+    public void fillOutSignUpForm(String email, String password) {
+        emailInput.sendKeys(email);
+        passwordInput.sendKeys(password);
+        passwordRepeatInput.sendKeys(password);
+    }
 }

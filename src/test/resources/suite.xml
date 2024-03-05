@@ -3,7 +3,8 @@
 <suite name="My suite">
     <test name="Mobile Test">
         <classes>
-           <class name="com.globant.tests.MenuBarTest"></class>
+           <!--<class name="com.globant.tests.MenuBarTest"></class>-->
+            <class name="com.globant.tests.SignUpTest"></class>
         </classes>
     </test>
 </suite>
