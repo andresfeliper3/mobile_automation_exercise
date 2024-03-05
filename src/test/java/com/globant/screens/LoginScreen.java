@@ -28,6 +28,10 @@ public class LoginScreen extends BaseScreen {
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"SIGN UP\")")
     private WebElement signUpButton;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"LOGIN\")")
+    private WebElement loginButton;
+
+
     public LoginScreen(AndroidDriver androidDriver) {
         super(androidDriver);
     }
@@ -57,13 +61,17 @@ public class LoginScreen extends BaseScreen {
         signUpMenu.click();
     }
 
-    public void fillOutSignUpForm(String email, String password) {
+    public void signUp(String email, String password) {
+        fillOutSignUpForm(email, password);
+        clickOnSignUpButton();
+    }
+    private void fillOutSignUpForm(String email, String password) {
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         passwordRepeatInput.sendKeys(password);
     }
 
-    public void clickOnLoginButton() {
+    private void clickOnSignUpButton() {
         waitForElementVisible(signUpButton);
         signUpButton.click();
     }
@@ -76,5 +84,20 @@ public class LoginScreen extends BaseScreen {
         alertText = alertText.replace("\n", "\\n");
         alert.accept();
         return alertText;
+    }
+
+    public void login(String email, String password) {
+        fillOutLoginForm(email, password);
+        clickOnLoginButton();
+    }
+
+    private void fillOutLoginForm(String email, String password) {
+        emailInput.sendKeys(email);
+        passwordInput.sendKeys(password);
+    }
+
+    private void clickOnLoginButton() {
+        waitForElementVisible(loginButton);
+        loginButton.click();
     }
 }

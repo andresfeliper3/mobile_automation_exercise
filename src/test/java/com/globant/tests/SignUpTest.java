@@ -13,8 +13,7 @@ public class SignUpTest extends BaseTest {
         HomeScreen homeScreen = getHomeScreen();
         LoginScreen loginScreen = homeScreen.clickOnLoginOption();
         loginScreen.clickOnSignUpMenu();
-        loginScreen.fillOutSignUpForm(email, password);
-        loginScreen.clickOnLoginButton();
+        loginScreen.signUp(email, password);
         String alertText = loginScreen.acceptAlertAndGetText();
 
         Assert.assertEquals(alertText, "Signed Up!\\nYou successfully signed up!");
