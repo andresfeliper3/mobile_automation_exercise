@@ -3,6 +3,7 @@ package com.globant.screens;
 import com.globant.utils.screens.BaseScreen;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 
 public class LoginScreen extends BaseScreen {
@@ -24,6 +25,8 @@ public class LoginScreen extends BaseScreen {
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Sign up\")")
     private WebElement signUpMenu;
 
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"SIGN UP\")")
+    private WebElement signUpButton;
 
     public LoginScreen(AndroidDriver androidDriver) {
         super(androidDriver);
@@ -58,5 +61,20 @@ public class LoginScreen extends BaseScreen {
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         passwordRepeatInput.sendKeys(password);
+    }
+
+    public void clickOnLoginButton() {
+        waitForElementVisible(signUpButton);
+        signUpButton.click();
+    }
+
+
+    public String acceptAlertAndGetText() {
+        waitForAlertVisible();
+        Alert alert = androidDriver.switchTo().alert();
+        String alertText = alert.getText();
+        alertText = alertText.replace("\n", "\\n");
+        alert.accept();
+        return alertText;
     }
 }

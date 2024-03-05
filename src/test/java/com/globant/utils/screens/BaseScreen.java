@@ -51,6 +51,10 @@ public class BaseScreen {
         webDriverWait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
+    public void waitForAlertVisible() {
+        webDriverWait.until(ExpectedConditions.alertIsPresent());
+    }
+
     public WebViewScreen clickOnWebViewOption() {
         if(isElementVisible(webViewOption))
             webViewOption.click();
@@ -80,6 +84,5 @@ public class BaseScreen {
             dragOption.click();
         return new DragScreen(androidDriver);
     }
-
 
 }
