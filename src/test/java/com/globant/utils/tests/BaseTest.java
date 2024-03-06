@@ -69,7 +69,7 @@ public class BaseTest {
 
     @AfterMethod
     public void close() {
-        //androidDriver.quit();
+        androidDriver.quit();
     }
 
     public HomeScreen getHomeScreen() {

@@ -5,9 +5,9 @@
     <parameter name="registeredPassword" value="12345678"></parameter>
     <test name="Mobile Test">
         <classes>
-           <!--<class name="com.globant.tests.MenuBarTest"></class>-->
-            <!--<class name="com.globant.tests.SignUpTest"></class>-->
-            <!--<class name="com.globant.tests.LoginTest"/>-->
+           <class name="com.globant.tests.MenuBarTest"></class>
+            <class name="com.globant.tests.SignUpTest"></class>
+            <class name="com.globant.tests.LoginTest"/>
             <class name="com.globant.tests.SwipeCardsTest"></class>
         </classes>
     </test>

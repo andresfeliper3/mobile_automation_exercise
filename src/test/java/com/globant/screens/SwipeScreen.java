@@ -3,7 +3,6 @@ package com.globant.screens;
 import com.globant.utils.screens.BaseScreen;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.PointerInput;
@@ -11,6 +10,7 @@ import org.openqa.selenium.interactions.Sequence;
 
 import java.time.Duration;
 import java.util.Collections;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class SwipeScreen extends BaseScreen {
@@ -22,8 +22,11 @@ public class SwipeScreen extends BaseScreen {
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"FULLY OPEN SOURCE\")")
     private WebElement firstCardTitle;
 
-    @AndroidFindBy(accessibility = "Carousel")
-    private WebElement carousel;
+    @AndroidFindBy(accessibility = "card")
+    private List<WebElement> presentCards;
+
+    @AndroidFindBy(uiAutomator = "new UiSelector().text(\"You found me!!!\")")
+    private WebElement youFoundMeText;
 
     public SwipeScreen(AndroidDriver androidDriver) {
         super(androidDriver);
@@ -47,13 +50,31 @@ public class SwipeScreen extends BaseScreen {
     }
 
     public void swipeRight() {
-        Dimension size = androidDriver.manage().window().getSize();
-        // Define the start and end coordinates for the swipe
-        int startX = 1180; // Start from the right side of the screen
-        int startY = 1568; // Y coordinate doesn't change for horizontal swipe
-        int endX = 360;   // End at the left side of the screen
-        int endY = 500;   // Y coordinate doesn't change for horizontal swipe
+        swipe(1180, 1568, 360, 500);
+    }
 
+    public void swipeToTheLastCard() {
+        for(int i = 0; i < TOTAL_CARDS_AMOUNT; i++) {
+            swipeRight();
+        }
+    }
+
+    public int getPresentCardsSize() {
+        return presentCards.size();
+    }
+
+    public void swipeVertically() {
+        swipe(670, 890, 670, 150);
+    }
+
+    public void swipeToBottom() {
+        swipe(970, 890, 670, 150);
+        for(int i = 0; i < 5; i++) {
+            swipe(720, 2000, 720, 1840);
+        }
+    }
+
+    private void swipe(int startX, int startY, int endX, int endY) {
         PointerInput pointerInput = new PointerInput(PointerInput.Kind.TOUCH, "swipe");
         Sequence sequence = new Sequence(pointerInput, 1)
                 .addAction(pointerInput.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY))
@@ -64,10 +85,7 @@ public class SwipeScreen extends BaseScreen {
         androidDriver.perform(Collections.singletonList(sequence));
     }
 
-    public void swipeToTheLastCard(int swipedCardsAmount) {
-        for(int i = 0; i < TOTAL_CARDS_AMOUNT - 1 -swipedCardsAmount; i++) {
-            swipeRight();
-        }
+    public String getYouFoundMeText() {
+        return youFoundMeText.getText();
     }
-
 }
