@@ -69,7 +69,7 @@ public class SwipeScreen extends BaseScreen {
 
     public void swipeToBottom() {
         swipe(970, 890, 670, 150);
-        for(int i = 0; i < 25t add ; i++) {
+        for(int i = 0; i < 25; i++) {
             swipe(720, 2000, 720, 1800);
         }
     }
