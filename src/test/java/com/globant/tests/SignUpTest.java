@@ -12,6 +12,7 @@ public class SignUpTest extends BaseTest {
     public void successfulSignUpTest(String email, String password) {
         HomeScreen homeScreen = getHomeScreen();
         LoginScreen loginScreen = homeScreen.clickOnLoginOption();
+
         loginScreen.clickOnSignUpMenu();
         loginScreen.signUp(email, password);
         String alertText = loginScreen.acceptAlertAndGetText();

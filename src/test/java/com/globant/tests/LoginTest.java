@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-//check test structure and login and sign up shared buttons
+
 public class LoginTest extends BaseTest {
 
     @Test
@@ -19,8 +19,7 @@ public class LoginTest extends BaseTest {
         loginScreen.login(email, password);
 
         String alertText = loginScreen.acceptAlertAndGetText();
-        System.out.println(alertText);
-        Assert.assertEquals(alertText, "Success\\nYou are logged in!");
 
+        Assert.assertEquals(alertText, "Success\\nYou are logged in!");
     }
 }
