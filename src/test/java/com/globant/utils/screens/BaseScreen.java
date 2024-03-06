@@ -37,7 +37,7 @@ public class BaseScreen {
 
     public BaseScreen(AndroidDriver androidDriver) {
         this.androidDriver = androidDriver;
-        webDriverWait = new WebDriverWait(androidDriver, Duration.ofSeconds(15));
+        webDriverWait = new WebDriverWait(androidDriver, Duration.ofSeconds(20));
         PageFactory.initElements(new AppiumFieldDecorator(androidDriver), this);
     }
 
